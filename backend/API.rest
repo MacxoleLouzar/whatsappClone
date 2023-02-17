@@ -1,0 +1,8 @@
+### check if server is up
+GET http://localhost:8000/
+
+###Get all messages
+GET http://localhost:8000/api/message/sync
+
+###Add messages
+POST http://localhost:8000/api/message
