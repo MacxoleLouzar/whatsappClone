@@ -16,6 +16,8 @@ const pusher = new Pusher({
     useTLS: true
   });
 
+
+  
   const db = mongoose.connection;
   db.once('open', ()=>{
     console.log('Db connected');
