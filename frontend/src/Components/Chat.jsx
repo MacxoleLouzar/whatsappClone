@@ -8,7 +8,7 @@ import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import MicIcon from "@mui/icons-material/Mic";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 
-function Chat() {
+function Chat({ message }) {
   return (
     <div className="chat">
       <div className="chat_header">
@@ -31,21 +31,19 @@ function Chat() {
       </div>
 
       <div className="chat_body">
-        <p className="chat_message">
-          <span className="chat_name">Loza</span>
-          This is a message
-          <span className="chat_timestamp">{new Date().toUTCString()}</span>
-        </p>
-        <p className="chat_message chat_reciever">
-          <span className="chat_name">Lutho</span>
-          This is a message
-          <span className="chat_timestamp">{new Date().toUTCString()}</span>
-        </p>
-        <p className="chat_message">
-          <span className="chat_name">Loza</span>
-          This is a message
-          <span className="chat_timestamp">{new Date().toUTCString()}</span>
-        </p>
+        {message.length > 0 &&
+          message.map((msg, index) => (
+            <p
+              className={
+                msg.received ? "chat_message chat_reciever" : "chat_message"
+              }
+              key={index}
+            >
+              <span className="chat_name">{msg.name}</span>
+              {msg?.message ? msg.message : "..."}
+              <span className="chat_timestamp">{msg.timestamp}</span>
+            </p>
+          ))}
       </div>
       <div className="chat_footer">
         <IconButton>
@@ -55,12 +53,11 @@ function Chat() {
           <input placeholder="type message" type="text" />
           <button type="submit">Send a message</button>
           <IconButton>
-          <AttachFileIcon />
-        </IconButton>
-        <IconButton>
-          <CameraAltIcon />
-        </IconButton>
-         
+            <AttachFileIcon />
+          </IconButton>
+          <IconButton>
+            <CameraAltIcon />
+          </IconButton>
         </form>
         <IconButton>
           <MicIcon />
